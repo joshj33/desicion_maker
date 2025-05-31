@@ -1,0 +1,66 @@
+// Defining the variables.
+var historic = getText("historicDropdown");
+var nature = getText("natureDropdown");
+var money;
+
+//Purpose: This app outputs and recommended UNESCO World Heritage site for the user to
+// go to based on the inputs about the user's preferences: whether they like naturesque
+// places or city-like places, if they like historic places or modern places, and
+// how much money they are willing to spend per person.
+
+//Function: 
+onEvent("historicDropdown", "change", function() {
+  historic = getText("historicDropdown");
+});
+
+onEvent("natureDropdown", "change", function() {
+  nature = getText("natureDropdown");
+});
+
+onEvent("moneySlider", "input", function() {
+  money = getNumber("moneySlider");
+  setProperty("moneyText", "text", "$" + money);
+  setProperty("moneyText", "font-size", 23);
+});
+
+// Code for the "home" button on each page.
+onEvent("vacationButton", "click", function() {
+  updateScreen();
+});
+
+onEvent("homeButtonAmazon", "click", function( ) {
+  setScreen("homeScreen");
+});
+
+onEvent("homeButtonCocos", "click", function( ) {
+  setScreen("homeScreen");
+});
+
+onEvent("homeButtonAthens", "click", function( ) {
+  setScreen("homeScreen");
+});
+
+onEvent("homeButtonNessebar", "click", function( ) {
+  setScreen("homeScreen");
+});
+
+onEvent("homeButtonGraz", "click", function( ) {
+  setScreen("homeScreen");
+});
+
+// Function to update the screen based on the user inputs
+function updateScreen() {
+  if (money >= 400 && nature == "Nature") {
+    setScreen("CocosScreen");
+  } else if ((money >= 200 && money < 400) && (nature == "City")) {
+    setScreen("athensScreen");
+  } else if ((money >= 100 && money < 400) && (nature == "Nature")) {
+    setScreen("amazonScreen");
+  } else if ((money >= 100 && money < 400) && (historic == "Historic")) {
+    setScreen("NessebarScreen");
+  } else if (nature == "City" && historic == "modern") {
+    setScreen("grazScreen");
+  } else {
+    setScreen("NessebarScreen");
+  }
+}
